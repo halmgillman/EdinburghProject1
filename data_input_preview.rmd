@@ -4,8 +4,9 @@ output: github_document
 ---
 
 ```{r setup, include=TRUE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, include = TRUE)
 source("data_input.R")
+library(knitr)
 ```
 
 ## Introduction
@@ -23,8 +24,8 @@ These attributes include location and ID number.
 This is the main dataset, with an added column that takes the initial prefix of the postcode.
 
 ```{r dataframe1}
-paged_table(
-    df
+kable(
+  df
 )
 ```
 
@@ -33,8 +34,8 @@ paged_table(
 This is a count of cameras by postcode prefix.
 
 ```{r dataframe2}
-paged_table(
-    postcode_count
+kable(
+  postcode_count
 )
 ```
 
@@ -43,8 +44,8 @@ paged_table(
 This is a count of cameras by locality.
 
 ```{r dataframe3}
-paged_table(
-    locality_count
+kable(
+  locality_count
 )
 ```
 
@@ -54,26 +55,26 @@ paged_table(
 ggplot(
   postcode_count,
   aes(
-    PostcodePrefix,
+    reorder(PostcodePrefix, PostcodeCount),
     PostcodeCount,
     fill = PostcodeCount
-  ) +
-    geom_col() +
-    labs(x = "Postcode Prefix", y = "CCTV Count") +
-    scale_fill_gradient2(high = "green", low = "grey")
-)
+  )
+ ) +
+  geom_col() +
+  labs(x = "Postcode Prefix", y = "CCTV Count", fill = "CCTV Cameras") +
+  scale_fill_gradient2(high = "green", low = "grey")
 ```
 
 ```{r locality_counts}
 ggplot(
   locality_count,
   aes(
-    Locality,
+    reorder(Locality, LocalityCount),
     LocalityCount,
     fill = LocalityCount
-  ) +
-    geom_col() +
-    labs(x = "Locality", y = "CCTV Count") +
-    scale_fill_gradient2(high = "green", low = "grey")
-)
+  )
+ ) +
+  geom_col() +
+  labs(x = "Locality", y = "CCTV Count", fill = "CCTV Cameras") +
+  scale_fill_gradient2(high = "green", low = "grey")
 ```
