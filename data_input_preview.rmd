@@ -1,0 +1,79 @@
+---
+title: "Preview: Sourced Dataframes"
+output: github_document
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+source("data_input.R")
+```
+
+## Introduction
+
+This document is used to test and preview the feed of data from the sourced `data_input.R` file.
+
+At present, the dataset comes from the City of Edinburgh Council's open data sets, and shares attributes about each public CCTV camera in the city.
+
+These attributes include location and ID number.
+
+## Previewing Dataframes
+
+##### df
+
+This is the main dataset, with an added column that takes the initial prefix of the postcode.
+
+```{r dataframe1}
+paged_table(
+    df
+)
+```
+
+##### postcode_count
+
+This is a count of cameras by postcode prefix.
+
+```{r dataframe2}
+paged_table(
+    postcode_count
+)
+```
+
+##### locality_count
+
+This is a count of cameras by locality.
+
+```{r dataframe3}
+paged_table(
+    locality_count
+)
+```
+
+## Plotting Counts
+
+```{r postcode_counts}
+ggplot(
+  postcode_count,
+  aes(
+    PostcodePrefix,
+    PostcodeCount,
+    fill = PostcodeCount
+  ) +
+    geom_col() +
+    labs(x = "Postcode Prefix", y = "CCTV Count") +
+    scale_fill_gradient2(high = "green", low = "grey")
+)
+```
+
+```{r locality_counts}
+ggplot(
+  locality_count,
+  aes(
+    Locality,
+    LocalityCount,
+    fill = LocalityCount
+  ) +
+    geom_col() +
+    labs(x = "Locality", y = "CCTV Count") +
+    scale_fill_gradient2(high = "green", low = "grey")
+)
+```
