@@ -25,7 +25,7 @@ This is the main dataset, with an added column that takes the initial prefix of 
 
 ```{r dataframe1}
 kable(
-  df
+  head(df)
 )
 ```
 
@@ -62,7 +62,8 @@ ggplot(
  ) +
   geom_col() +
   labs(x = "Postcode Prefix", y = "CCTV Count", fill = "CCTV Cameras") +
-  scale_fill_gradient2(high = "green", low = "grey")
+  scale_fill_gradient2(high = "green", low = "grey") +
+  theme(axis.text.x=element_text(angle = -45, hjust = 0))
 ```
 
 ```{r locality_counts}
