@@ -1,5 +1,8 @@
 # Libraries
 library(readr)
+library(readxl)
+library(httr2)
+library(jsonlite)
 library(tidyverse)
 library(forstringr)
 
@@ -29,3 +32,7 @@ locality_count <- df %>%
 # Loading data
 df2 <- read_csv("https://statistics.gov.scot/downloads/cube-table?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Frecorded-crime") %>%  # nolint: line_length_linter
   filter(FeatureName == "City of Edinburgh")
+
+# -- df3 (Police confidence) -- #
+# Loading data
+df3 <- read_csv("https://statistics.gov.scot/downloads/cube-table?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fconfidence-in-policing-sscq") # nolint: line_length_linter
